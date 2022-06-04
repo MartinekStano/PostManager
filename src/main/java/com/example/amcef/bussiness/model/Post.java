@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.Formatter;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -19,9 +20,10 @@ public class Post implements Serializable {
     private String title;
     private String body;
 
-    public Post(int userId, String title, String body) {
-        this.userId = userId;
+    public Post(int id, String title, String body){
+        this.id = id;
         this.title = title;
         this.body = body;
     }
+
 }

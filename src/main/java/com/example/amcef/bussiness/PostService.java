@@ -2,11 +2,15 @@ package com.example.amcef.bussiness;
 
 import com.example.amcef.bussiness.dto.CreatePostDTO;
 import com.example.amcef.bussiness.model.Post;
+import com.example.amcef.bussiness.model.User;
 import com.example.amcef.exception.BadRequestParams;
 import com.example.amcef.exception.PostNotFound;
+import com.example.amcef.exception.UserNotFound;
 import lombok.AllArgsConstructor;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Collection;
@@ -24,10 +28,10 @@ public class PostService {
 
     public Post getPostFromJSonPlaceHolder(int postId){
 
-        String url = "https://jsonplaceholder.typicode.com/posts/{id}";
+        String urlForPost = "https://jsonplaceholder.typicode.com/posts/{id}";
 
         try{
-            ResponseEntity<Post> responseEntity = restTemplate.getForEntity(url, Post.class, postId );
+            ResponseEntity<Post> responseEntity = restTemplate.getForEntity(urlForPost, Post.class, postId );
 
             if(responseEntity.getStatusCode() == HttpStatus.OK){
                 return responseEntity.getBody();
@@ -42,15 +46,54 @@ public class PostService {
 
     public void deletePostFromJSonPlaceHolder(int postId){
 
+        String urlForPost = "https://jsonplaceholder.typicode.com/posts/{id}";
+
+        try {
+            restTemplate.delete(urlForPost, postId);
+        }catch (HttpStatusCodeException ex){
+            if(ex.getRawStatusCode() == 404){
+                throw new PostNotFound("Post was not found");
+            }else{
+                throw new BadRequestParams("Something went wrong");
+            }
+        }
     }
 
-    public void updatePostFromJSonPlaceHolder(int postId, String body, String title){
+    public Post updatePostFromJSonPlaceHolder(int postId, String title, String body){
+
+        String urlForPost = "https://jsonplaceholder.typicode.com/posts/{id}";
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+
+        Post post = new Post(postId, title, body);
+        HttpEntity<Post> entity = new HttpEntity<>(post, headers);
+
+        try {
+            ResponseEntity<Post> responseEntity = restTemplate.exchange(urlForPost, HttpMethod.PUT, entity, Post.class, postId);
+
+            if(responseEntity.getStatusCode() == HttpStatus.OK){
+                return getPostFromJSonPlaceHolder(postId);
+            }
+            throw new BadRequestParams("Something went wrong");
+
+        }catch (HttpStatusCodeException ex){
+            if(ex.getRawStatusCode() == 404) {
+                throw new PostNotFound("Post was not found");
+            }
+            else {
+                throw new BadRequestParams("Something went wrong");
+            }
+
+        }
 
     }
 
     public Post addNewPostToJSonPlaceHolder(CreatePostDTO createPostDTO){
 
-        String url = "https://jsonplaceholder.typicode.com/posts";
+        String urlForPost = "https://jsonplaceholder.typicode.com/posts";
+        String urlForUser = "https://jsonplaceholder.typicode.com/users/{id}";
 
         //Setup headers
         HttpHeaders headers = new HttpHeaders();
@@ -62,24 +105,24 @@ public class PostService {
         map.put("title", createPostDTO.getTitle());
         map.put("body", createPostDTO.getBody());
 
-        Post post = new Post(
-                createPostDTO.getUserId(),
-                createPostDTO.getTitle(),
-                createPostDTO.getBody()
-        );
-
         HttpEntity<Map<String, Object>> entity = new HttpEntity<>(map, headers);
 
+
         try {
-            ResponseEntity<Post> responseEntity = restTemplate.postForEntity(url, post, Post.class);
+            ResponseEntity<User> responseUser = restTemplate.getForEntity(urlForUser, User.class, createPostDTO.getUserId());
 
-            if(responseEntity.getStatusCode() == HttpStatus.CREATED){
-                return responseEntity.getBody();
+            if (responseUser.getStatusCode() == HttpStatus.OK){
+
+                ResponseEntity<Post> responseEntity = restTemplate.postForEntity(urlForPost, entity, Post.class);
+                if (responseEntity.getStatusCode() == HttpStatus.CREATED){
+                    return responseEntity.getBody();
+                }
+                throw new BadRequestParams("Something went wrong");
             }
-            throw new BadRequestParams("Sending Params are incorrect!");
+            throw new BadRequestParams("Something went wrong");
 
-        }catch (PostNotFound ignored){
-            throw new PostNotFound("User was not found!"); // to do exc
+        }catch (UserNotFound ignored){
+            throw new UserNotFound("User was not found");
         }
 
     }

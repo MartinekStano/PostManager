@@ -2,6 +2,7 @@ package com.example.amcef.presentation;
 
 import com.example.amcef.bussiness.PostService;
 import com.example.amcef.bussiness.dto.CreatePostDTO;
+import com.example.amcef.bussiness.dto.PutPostDTO;
 import com.example.amcef.bussiness.model.Post;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +26,13 @@ public class PostController {
     @PostMapping(path = "/api/v1/addNewPost")
     public Post addNewPost(@RequestBody CreatePostDTO createPostDTO){
         return postService.addNewPostToJSonPlaceHolder(createPostDTO);
+    }
+
+    @PutMapping(path = "/api/v1/updatePost/{postId}")
+    public Post updatePost(
+            @PathVariable("postId") int postId,
+            @RequestBody PutPostDTO putPostDTO) {
+         return postService.updatePostFromJSonPlaceHolder(postId, putPostDTO.getTitle(), putPostDTO.getBody());
     }
 
 }

@@ -29,6 +29,14 @@ Endpoints were tested using
   - request to return specific post by `postId`
   - `/api/v1/getPost/{postId}`
 
+ - the answer
+    `{`
+    `"userId": "2"`
+    `"id:12"`
+    `"title": "in quibusdam tempore odit est dolorem"`
+    `"body": "itaque id aut magnam\npraesentium quia et ea odit et ea voluptas et\nsapiente quia nihil amet occaecati quia id voluptatem\nincidunt ea est distinctio odio"`
+    `}`
+
 #2.POST 
   - request to return specific post by `postId`
   - `/api/v1/addNewPost`
@@ -38,10 +46,34 @@ Endpoints were tested using
     `"userId": "2"`
     `"title": "in quibusdam tempore odit est dolorem"`
     `"body": "itaque id aut magnam\npraesentium quia et ea odit et ea voluptas et\nsapiente quia nihil amet occaecati quia id voluptatem\nincidunt ea est distinctio odio"`
+    `}`
+    
+    - the answer
+    `{`
+    `"userId": "2"`
+    `"id:101"`
+    `"title": "in quibusdam tempore odit est dolorem"`
+    `"body": "itaque id aut magnam\npraesentium quia et ea odit et ea voluptas et\nsapiente quia nihil amet occaecati quia id voluptatem\nincidunt ea est distinctio odio"`
+    `}`
 
 #3.PUT 
   - request to return specific post by `postId`
   - `/api/v1/updatePost/{postId}`
+
+- pass body as JSON
+    `{`
+    `id": "2"`
+    `"title": "in quibusdam tempore odit est dolorem"`
+    `"body": "itaque id aut magnam\npraesentium quia et ea odit et ea voluptas et\nsapiente quia nihil amet occaecati quia id voluptatem\nincidunt ea est distinctio odio"`
+    `}`
+    
+     - the answer
+    `{`
+    `"userId": "2"`
+    `"id:2"`
+    `"title": "in quibusdam tempore odit est dolorem"`
+    `"body": "itaque id aut magnam\npraesentium quia et ea odit et ea voluptas et\nsapiente quia nihil amet occaecati quia id voluptatem\nincidunt ea est distinctio odio"`
+    `}`
 
 #4.DELETE 
   - request to return specific post by `postId`

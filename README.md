@@ -33,6 +33,12 @@ Endpoints were tested using
   - request to return specific post by `postId`
   - `/api/v1/addNewPost`
 
+  - pass body as JSON
+    `{`
+    `"userId": "2"`
+    `"title": "in quibusdam tempore odit est dolorem"`
+    `"body": "itaque id aut magnam\npraesentium quia et ea odit et ea voluptas et\nsapiente quia nihil amet occaecati quia id voluptatem\nincidunt ea est distinctio odio"`
+
 #3.PUT 
   - request to return specific post by `postId`
   - `/api/v1/updatePost/{postId}`

@@ -29,8 +29,8 @@ Endpoints were tested using
   - request to return specific post by `postId`
   - `/api/v1/getPost/{postId}`
 
- - the answer
-    `{`<br />
+ - the answer<br />
+    `{`
     `"userId": "2"`<br />
     `"id:12"`<br />
     `"title": "in quibusdam tempore odit est dolorem"`<br />
@@ -41,18 +41,18 @@ Endpoints were tested using
   - request to return specific post by `postId`
   - `/api/v1/addNewPost`
 
-  - pass body as JSON
+  - pass body as JSON<br />
     `{`
-    `"userId": "2"`
-    `"title": "in quibusdam tempore odit est dolorem"`
+    `"userId": "2"`<br />
+    `"title": "in quibusdam tempore odit est dolorem"`<br />
     `"body": "itaque id aut magnam\npraesentium quia et ea odit et ea voluptas et\nsapiente quia nihil amet occaecati quia id voluptatem\nincidunt ea est distinctio odio"`
     `}`
     
-    - the answer
+    - the answer<br />
     `{`
-    `"userId": "2"`
-    `"id:101"`
-    `"title": "in quibusdam tempore odit est dolorem"`
+    `"userId": "2"`<br />
+    `"id:101"`<br />
+    `"title": "in quibusdam tempore odit est dolorem"`<br />
     `"body": "itaque id aut magnam\npraesentium quia et ea odit et ea voluptas et\nsapiente quia nihil amet occaecati quia id voluptatem\nincidunt ea est distinctio odio"`
     `}`
 
@@ -60,18 +60,18 @@ Endpoints were tested using
   - request to return specific post by `postId`
   - `/api/v1/updatePost/{postId}`
 
-- pass body as JSON
+- pass body as JSON<br />
     `{`
-    `id": "2"`
-    `"title": "in quibusdam tempore odit est dolorem"`
+    `id": "2"`<br />
+    `"title": "in quibusdam tempore odit est dolorem"`<br />
     `"body": "itaque id aut magnam\npraesentium quia et ea odit et ea voluptas et\nsapiente quia nihil amet occaecati quia id voluptatem\nincidunt ea est distinctio odio"`
     `}`
     
-     - the answer
+     - the answer<br />
     `{`
-    `"userId": "2"`
-    `"id:2"`
-    `"title": "in quibusdam tempore odit est dolorem"`
+    `"userId": "2"`<br />
+    `"id:2"`<br />
+    `"title": "in quibusdam tempore odit est dolorem"`<br />
     `"body": "itaque id aut magnam\npraesentium quia et ea odit et ea voluptas et\nsapiente quia nihil amet occaecati quia id voluptatem\nincidunt ea est distinctio odio"`
     `}`
 

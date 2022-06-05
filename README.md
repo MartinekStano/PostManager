@@ -20,7 +20,7 @@ Endpoints were tested using
 
 1. `cd/<local_directory>/postmanager`
 2.  `mvn clean package`
-3.  Build The Docker Image: `docker build -t postmanager-docker.`
+3.  Build The Docker Image: `docker build -t postmanager-docker`
 4.  Run The Spring Boot Application: `docker run -p 8080:8080 postmanager-docker`
 
 ## REST Endpoints
@@ -30,10 +30,10 @@ Endpoints were tested using
   - `/api/v1/getPost/{postId}`
 
  - the answer
-    `{`
-    `"userId": "2"`
-    `"id:12"`
-    `"title": "in quibusdam tempore odit est dolorem"`
+    `{`<br />
+    `"userId": "2"`<br />
+    `"id:12"`<br />
+    `"title": "in quibusdam tempore odit est dolorem"`<br />
     `"body": "itaque id aut magnam\npraesentium quia et ea odit et ea voluptas et\nsapiente quia nihil amet occaecati quia id voluptatem\nincidunt ea est distinctio odio"`
     `}`
 

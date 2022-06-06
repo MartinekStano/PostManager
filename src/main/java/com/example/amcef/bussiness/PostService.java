@@ -9,11 +9,9 @@ import com.example.amcef.exception.UserNotFound;
 import lombok.AllArgsConstructor;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -36,10 +34,15 @@ public class PostService {
             if(responseEntity.getStatusCode() == HttpStatus.OK){
                 return responseEntity.getBody();
             }
-            throw new BadRequestParams("Sending Params are incorrect!");
+            return null;
 
-        }catch (PostNotFound ignored){
-            throw new PostNotFound("Post was not found!");
+        }catch (HttpStatusCodeException ex){
+            if(ex.getRawStatusCode() == 400) {
+                throw new BadRequestParams("Something went wrong");
+            }
+            else {
+                throw new PostNotFound("Post was not found");
+            }
         }
 
     }
@@ -50,12 +53,8 @@ public class PostService {
 
         try {
             restTemplate.delete(urlForPost, postId);
-        }catch (HttpStatusCodeException ex){
-            if(ex.getRawStatusCode() == 404){
-                throw new PostNotFound("Post was not found");
-            }else{
-                throw new BadRequestParams("Something went wrong");
-            }
+        }catch (HttpStatusCodeException ignored){
+            throw new BadRequestParams("Something went wrong");
         }
     }
 
@@ -76,14 +75,14 @@ public class PostService {
             if(responseEntity.getStatusCode() == HttpStatus.OK){
                 return getPostFromJSonPlaceHolder(postId);
             }
-            throw new BadRequestParams("Something went wrong");
-
+            //throw new BadRequestParams("Something went wrong");
+            return null;
         }catch (HttpStatusCodeException ex){
-            if(ex.getRawStatusCode() == 404) {
-                throw new PostNotFound("Post was not found");
+            if(ex.getRawStatusCode() == 400) {
+                throw new BadRequestParams("Something went wrong");
             }
             else {
-                throw new BadRequestParams("Something went wrong");
+                throw new PostNotFound("Post was not found");
             }
 
         }
@@ -117,12 +116,17 @@ public class PostService {
                 if (responseEntity.getStatusCode() == HttpStatus.CREATED){
                     return responseEntity.getBody();
                 }
+                return null;
+            }
+            return null;
+
+        }catch (HttpStatusCodeException ex){
+            if(ex.getRawStatusCode() == 400) {
                 throw new BadRequestParams("Something went wrong");
             }
-            throw new BadRequestParams("Something went wrong");
-
-        }catch (UserNotFound ignored){
-            throw new UserNotFound("User was not found");
+            else {
+                throw new PostNotFound("Post was not found");
+            }
         }
 
     }

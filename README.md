@@ -5,7 +5,7 @@ Post manager is used to manage posts. We can view posts by `postId`, add new pos
 
 - Treatment of exceptions
 - Project scalability 
-- Pre-prepared endpoints
+- Pre-prepared database
 
 ## Built With
 

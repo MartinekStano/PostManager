@@ -16,7 +16,5 @@ Endpoints were tested using
 - Postman
 
 ## Getting Started
-
-## Copy Project
 - If you want just clone my repository switch to "master" branch.
 - If you want use docker for starting switch to "master-docker" branch.

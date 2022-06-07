@@ -19,9 +19,8 @@ Endpoints were tested using
 ###  To Run Using Docker File
 
 1. `cd/<local_directory>/postmanager`
-2.  `mvn clean package`
-3.  Build The Docker Image: `docker build -t postmanager-docker`
-4.  Run The Spring Boot Application: `docker run -p 8080:8080 postmanager-docker`
+2.  Build The Docker Image: `docker build -t postmanager-docker .`
+3.  Run The Spring Boot Application: `docker run -p 8080:8080 postmanager-docker`
 
 ## REST Endpoints
 

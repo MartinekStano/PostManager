@@ -16,11 +16,8 @@ Endpoints were tested using
 - Postman
 
 ## Getting Started
-###  To Run Using Docker File
-
-1. `cd/<local_directory>/postmanager`
-2.  Build The Docker Image: `docker build -t postmanager-docker .`
-3.  Run The Spring Boot Application: `docker run -p 8080:8080 postmanager-docker`
+###  Clone Project
+- copy url `https://github.com/MartinekStano/PostManager.git` to your IDE.
 
 ## REST Endpoints
 

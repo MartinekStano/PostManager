@@ -1,11 +1,10 @@
-package com.example.amcef.bussiness;
+package com.example.amcef.bussiness.service;
 
 import com.example.amcef.bussiness.dto.CreatePostDTO;
 import com.example.amcef.bussiness.model.Post;
 import com.example.amcef.bussiness.model.User;
 import com.example.amcef.exception.BadRequestParams;
 import com.example.amcef.exception.PostNotFound;
-import com.example.amcef.exception.UserNotFound;
 import lombok.AllArgsConstructor;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -75,8 +74,8 @@ public class PostService {
             if(responseEntity.getStatusCode() == HttpStatus.OK){
                 return getPostFromJSonPlaceHolder(postId);
             }
-            //throw new BadRequestParams("Something went wrong");
             return null;
+
         }catch (HttpStatusCodeException ex){
             if(ex.getRawStatusCode() == 400) {
                 throw new BadRequestParams("Something went wrong");

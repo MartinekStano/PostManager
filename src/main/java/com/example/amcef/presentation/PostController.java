@@ -1,6 +1,6 @@
 package com.example.amcef.presentation;
 
-import com.example.amcef.bussiness.PostService;
+import com.example.amcef.bussiness.service.PostService;
 import com.example.amcef.bussiness.dto.CreatePostDTO;
 import com.example.amcef.bussiness.dto.PutPostDTO;
 import com.example.amcef.bussiness.model.Post;
